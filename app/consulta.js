@@ -47,7 +47,7 @@
       ["Certidão de falência", "Tribunal de Justiça do estado sede: certidão cível de falência (inclua o link do seu estado)", []],
       ["Improbidade administrativa", "CNJ, CNPJ e CPF", [["Abrir","https://www.cnj.jus.br/improbidade_adm/consultar_requerido.php"]]],
       ["Licitantes inidôneos", "TCU, CNPJ e CPF", [["Abrir","https://certidoes.apps.tcu.gov.br/emitir-certidao-inidoneos"]]],
-      ["Certidão correcional (CEIS, CNEP, CEPIM)", "CGU, selecionar \"Ente Privado\"", [["Abrir","https://certidoes.cgu.gov.br/"]]],
+      ["Consulta CEIS (sanções)", "Portal da Transparência: pesquisar pelo CNPJ e pelo CPF do sócio (CEIS, CNEP e demais cadastros)", [["Abrir","https://portaldatransparencia.gov.br/sancoes/consulta?paginacaoSimples=true&tamanhoPagina=&offset=&direcaoOrdenacao=asc&colunasSelecionadas=linkDetalhamento%2Ccadastro%2CcpfCnpj%2CnomeSancionado%2CufSancionado%2Corgao%2CcategoriaSancao%2CdataPublicacao%2CvalorMulta%2Cquantidade&ordenarPor=nomeSancionado&direcao=asc"]]],
       ["Consulta Consolidada de Pessoa Jurídica", "TCU", [["Abrir","https://certidoes-apf.apps.tcu.gov.br/"]]]
     ]}
   ];

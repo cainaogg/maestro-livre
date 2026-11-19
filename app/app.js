@@ -493,7 +493,7 @@ function renderBarra() {
   const graves = conf.pontos.filter(p => p.nivel === 'erro').length, atencao = conf.pontos.filter(p => p.nivel !== 'lembrete').length;
   $('#procChips').innerHTML = (estado.docs.length ? `<span class="chip" title="Etapa em que o processo está, pelos documentos que já tem${conf.etapa.proxima ? '. Próxima: ' + esc(conf.etapa.proxima) : ''}">${esc(conf.etapa.nome)}</span>` : '') +
     (atencao ? `<button type="button" class="chip ${graves ? 'erro' : 'alerta'}" data-ir="arquivos" title="Ver a conferência do processo">${ic('alerta')}${atencao} ponto${atencao > 1 ? 's' : ''} de atenção</button>` : '') +
-    (cred ? `<span class="chip cred" title="Processo do Edital de Credenciamento: use os modelos marcados (Cred.)">${ic('estrela')}Credenciamento ${esc(cred)}</span>` : '') +
+    (cred ? `<span class="chip cred" title="Processo de credenciamento: sem nº de inexigibilidade nem Extrato de Inexigibilidade">${ic('estrela')}Credenciamento ${esc(cred)}</span>` : '') +
     (resumoCert ? `<button type="button" class="chip ${resumoCert.classe}" data-ir="arquivos" title="Ver as certidões">${ic(resumoCert.icone)}${esc(resumoCert.texto)}</button>` : '');
   const salvo = processos[estado.salvoId];
   $('#estadoSalvo').textContent = salvo ? `salvo em ${new Date(salvo.salvoEm).toLocaleDateString('pt-BR')}` : 'ainda não salvo';

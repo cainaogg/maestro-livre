@@ -6,6 +6,15 @@ Como os números sobem: **correção pequena** → 1.0.1 · **funcionalidade nov
 
 ---
 
+## 1.0.1 (19/11/2026)
+
+Revisão depois da primeira versão.
+
+- O link da **Consulta CEIS** abre a consulta de sanções do Portal da Transparência.
+- O Checklist não mostra mais o nome de uma secretaria no topo nem na assinatura do modelo de mensagem.
+- Etapa "Pagamento solicitado", que dependia de um documento que não existe mais no Checklist, saiu.
+- Textos corrigidos: aviso do balanço e explicação do credenciamento.
+
 ## 1.0.0 (19/11/2026)
 
 Primeira versão pública.

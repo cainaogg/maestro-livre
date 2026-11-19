@@ -816,7 +816,7 @@
   const ETAPAS = [
     [null, 'Instrução'], ['homolog', 'Homologado'], ['minuta', 'Minuta e conformidade'], ['d_dlc', 'Inexigibilidade numerada'],
     ['registrado', 'Contrato registrado'], ['assinado', 'Contrato assinado'], ['portaria', 'Portaria de fiscais'], ['empenho', 'Empenhado'],
-    ['ordem_inicio', 'Ordem de Início'], ['nf_servico', 'Nota fiscal recebida'], ['confirmacao', 'Despesa confirmada'], ['preparo', 'Pagamento solicitado'],
+    ['ordem_inicio', 'Ordem de Início'], ['nf_servico', 'Nota fiscal recebida'], ['confirmacao', 'Despesa confirmada'],
   ];
   // Itens exigidos: [id do Checklist, nome, tipos de contratado (null = todos), etapa em que já devia existir]
   // Mesmos itens e mesma aplicabilidade do checklist.html (GROUPS: t = tipos). Manter os dois iguais.
@@ -898,7 +898,7 @@
     // Balanço (empresa que não é MEI) e limite da dispensa de análise jurídica
     const valor = numero(v.VALOR);
     if (tipo === 'pj' && temDocs && !achados.balanco) P('lembrete', 'Empresa que não é MEI: o balanço dos 2 últimos exercícios é exigido' +
-      (valor && valor < LIMITE_DISPENSA / 4 ? `. Como o valor está abaixo de ${reais(LIMITE_DISPENSA / 4)}, a dispensa é possível, mas precisa ser justificada no processo ; confirme com o setor financeiro.` : ' (ser do Simples Nacional não dispensa).'));
+      (valor && valor < LIMITE_DISPENSA / 4 ? `. Como o valor está abaixo de ${reais(LIMITE_DISPENSA / 4)}, a dispensa é possível, mas precisa ser justificada no processo; confirme com o setor financeiro.` : ' (ser do Simples Nacional não dispensa).'));
     // Sede do contratado: as certidões municipal, estadual e de falência são as do lugar da sede
 
     // Prazos (dias úteis contam só sábado e domingo — confira feriados)
@@ -1063,7 +1063,7 @@
   const CHECKLIST_POR_NOME = [
     [/declaracao_conf/, 'conformidade'], [/dispensa_de_analise|parecer_juridico/, 'in004'],
     [/nota_de_empenho/, 'empenho'],
-    [/ordem_de_inicio/, 'ordem_inicio'], [/confirmacao_d[ae]_despesa/, 'confirmacao'], [/preparo_de_pagamento/, 'preparo'],
+    [/ordem_de_inicio/, 'ordem_inicio'], [/confirmacao_d[ae]_despesa/, 'confirmacao'],
   ];
 
   // ─── Conferência cruzada ──────────────────────────────────
@@ -1252,7 +1252,7 @@
     'TCU – Licitantes Inidôneos': ['Certidão Negativa de Licitantes Inidôneos', 'https://certidoes.apps.tcu.gov.br/emitir-certidao-inidoneos'],
     'TCU – Contas Julgadas Irregulares': ['Certidão Negativa de Contas Julgadas Irregulares', ''],
     'CNJ – Improbidade e Inelegibilidade': ['Certidão Negativa de Improb. Admin e Ineleg.', 'https://www.cnj.jus.br/improbidade_adm/consultar_requerido.php'],
-    'CGU – CEIS/Correcional': ['Consulta CEIS', 'https://certidoes.cgu.gov.br/'],
+    'CGU – CEIS/Correcional': ['Consulta CEIS', 'https://portaldatransparencia.gov.br/sancoes/consulta?paginacaoSimples=true&tamanhoPagina=&offset=&direcaoOrdenacao=asc&colunasSelecionadas=linkDetalhamento%2Ccadastro%2CcpfCnpj%2CnomeSancionado%2CufSancionado%2Corgao%2CcategoriaSancao%2CdataPublicacao%2CvalorMulta%2Cquantidade&ordenarPor=nomeSancionado&direcao=asc'],
     'Certidão Cível / Falência': ['Certidão Judicial Cível Negativa - Falência 1º Grau', ''], // Tribunal de Justiça do estado da sede
     'Comprovante ISSQN': ['Comprovante ISSQN', ''],
   };

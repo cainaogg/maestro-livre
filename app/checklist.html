@@ -302,7 +302,7 @@
 
 <div class="wrap">
   <header>
-    <div class="eyebrow">Secretaria Municipal da Cultura</div>
+    <div class="eyebrow">Maestro Livre</div>
     <h1>Checklist de documentos, Contratação por Inexigibilidade</h1>
     <p class="sub">Modelo reutilizável para qualquer contratação direta com base no art. 74, II, da Lei 14.133/2021. Crie um processo para cada contratação: cada um guarda seu próprio progresso, e processos do mesmo evento podem ser reunidos em um grupo. Os itens seguem a ordem da árvore do processo no SEI, e a estrutura pode ser ajustada em perfis. Informe o tipo de contratado para que os itens que não se aplicam saiam da contagem. O ícone <b>i</b> de cada item explica por que o documento é exigido e traz modelos de texto.</p>
   </header>
@@ -479,8 +479,8 @@
       {id:"inid_cpf", cert:true, text:"Certidão Negativa Licitantes Inidôneos CPF (30 dias)", t:["mei","pj"], link:"https://certidoes.apps.tcu.gov.br/emitir-certidao-inidoneos"},
       {id:"contas_cnpj", cert:true, text:"Certidão Negativa de Contas Julgadas Irregulares CNPJ (30 dias)", t:["mei","pj"]},
       {id:"contas_cpf", cert:true, text:"Certidão Negativa de Contas Julgadas Irregulares CPF (30 dias)", t:["mei","pj"]},
-      {id:"ceis_cnpj", cert:true, text:"Consulta CEIS CNPJ (30 dias)", hint:"A Certidão Negativa Correcional da CGU (ente privado) abrange CEIS, CNEP e CEPIM.", t:["mei","pj"], link:"https://certidoes.cgu.gov.br/"},
-      {id:"ceis_cpf", cert:true, text:"Consulta CEIS CPF (30 dias)", t:["mei","pj"], link:"https://certidoes.cgu.gov.br/"},
+      {id:"ceis_cnpj", cert:true, text:"Consulta CEIS CNPJ (30 dias)", hint:"Consulta de sanções no Portal da Transparência (CEIS, CNEP e demais cadastros). Pesquisar pelo CNPJ e pelo CPF do sócio.", t:["mei","pj"], link:"https://portaldatransparencia.gov.br/sancoes/consulta?paginacaoSimples=true&tamanhoPagina=&offset=&direcaoOrdenacao=asc&colunasSelecionadas=linkDetalhamento%2Ccadastro%2CcpfCnpj%2CnomeSancionado%2CufSancionado%2Corgao%2CcategoriaSancao%2CdataPublicacao%2CvalorMulta%2Cquantidade&ordenarPor=nomeSancionado&direcao=asc"},
+      {id:"ceis_cpf", cert:true, text:"Consulta CEIS CPF (30 dias)", t:["mei","pj"], link:"https://portaldatransparencia.gov.br/sancoes/consulta?paginacaoSimples=true&tamanhoPagina=&offset=&direcaoOrdenacao=asc&colunasSelecionadas=linkDetalhamento%2Ccadastro%2CcpfCnpj%2CnomeSancionado%2CufSancionado%2Corgao%2CcategoriaSancao%2CdataPublicacao%2CvalorMulta%2Cquantidade&ordenarPor=nomeSancionado&direcao=asc"},
       {id:"tcu_consolidada", cert:true, text:"Consulta Consolidada TCU CNPJ (30 dias)", t:["mei","pj"], link:"https://certidoes-apf.apps.tcu.gov.br/"},
       {id:"issqn", text:"Comprovante de inscrição municipal / ISSQN (30 dias)", hint:"Inscrição no município sede do CNPJ.", t:["mei","pj"]}
     ], base:"<b>Autenticação:</b> ao incluir no SEI, use Formato \"Digitalizado nesta Unidade\" e Tipo de Conferência \"Documento com autenticidade eletrônica\", e clique em \"Autenticar Documento\". Todas devem estar negativas e dentro da validade até o pagamento: vencida ou com débito, o pagamento não é feito e é preciso reapresentar. Validade usual entre parênteses no nome de cada item; consultas sem validade impressa (CNJ, TCU Consolidada, ISSQN) são consideradas por 30 dias, como as demais consultas. Certidões em CPF referem-se ao sócio majoritário ou responsável legal. Pessoa física apresenta, em geral, federal, trabalhista e municipal: confira as regras do seu órgão."},
@@ -802,14 +802,14 @@
       pendencia: true
     },
     ceis_cnpj: {
-      pq: "Verifica se o contratado tem sanções que o impedem de contratar com a administração. A Certidão Negativa Correcional da CGU, para ente privado, reúne em um documento as consultas a: <ul><li><b>CEIS</b>, empresas e pessoas inidôneas e suspensas por qualquer órgão público do país;</li><li><b>CNEP</b>, empresas punidas pela Lei Anticorrupção;</li><li><b>CEPIM</b>, entidades sem fins lucrativos impedidas de receber recursos públicos;</li><li><b>ePAD e CGU-PJ</b>, processos de responsabilização em andamento na CGU.</li></ul>",
+      pq: "Verifica se o contratado tem sanções que o impedem de contratar com a administração. A consulta de sanções do Portal da Transparência reúne os cadastros: <ul><li><b>CEIS</b>, empresas e pessoas inidôneas e suspensas por qualquer órgão público do país;</li><li><b>CNEP</b>, empresas punidas pela Lei Anticorrupção;</li><li><b>CEPIM</b>, entidades sem fins lucrativos impedidas de receber recursos públicos;</li><li><b>ePAD e CGU-PJ</b>, processos de responsabilização em andamento na CGU.</li></ul>",
       quando: "Pessoa jurídica, em nome da empresa e do sócio majoritário.",
       extras: [
         ["Se aparecer registro", "Sanção de impedimento, suspensão ou inidoneidade em vigor impede a contratação. Processo apenas em andamento não impede, mas deve ser registrado e avaliado. Na dúvida, consultar o órgão jurídico."]
       ],
-      atencao: CERT_ATENCAO + " No site da CGU, escolher \"Ente Privado\".",
+      atencao: CERT_ATENCAO + " No Portal da Transparência, pesquisar pelo CNPJ da empresa e pelo CPF do sócio.",
       base: ["Lei 14.133/2021, arts. 14 e 156", "Lei 12.846/2013 (Lei Anticorrupção)"],
-      links: [["Certidões, CGU", "https://certidoes.cgu.gov.br/"]],
+      links: [["Consulta CEIS (sanções), Portal da Transparência", "https://portaldatransparencia.gov.br/sancoes/consulta?paginacaoSimples=true&tamanhoPagina=&offset=&direcaoOrdenacao=asc&colunasSelecionadas=linkDetalhamento%2Ccadastro%2CcpfCnpj%2CnomeSancionado%2CufSancionado%2Corgao%2CcategoriaSancao%2CdataPublicacao%2CvalorMulta%2Cquantidade&ordenarPor=nomeSancionado&direcao=asc"]],
       pendencia: true
     },
     tcu_consolidada: {
@@ -1416,7 +1416,7 @@
     if(d.pendencia){
       var nomeDoc = textOf(item, p);
       extras.push(["Modelo de mensagem: documento com pendência", "Texto para enviar ao contratado quando não for possível emitir, acessar ou validar este documento. O nome do documento já vem preenchido; troque o que está entre colchetes.",
-        "Assunto: Pendência na documentação para contratação, " + nomeDoc + "\n\nOlá, [nome].\n\nNa conferência da documentação para a sua contratação pelo [nome do órgão], não foi possível obter ou validar o seguinte documento:\n\n" + nomeDoc + ", referente ao [CNPJ/CPF nº].\n\nMotivo: [ex.: a certidão foi emitida como positiva / o site do órgão emissor indicou pendência / não foi possível emitir o documento pelo site].\n\nPara seguirmos com o processo, solicitamos que você verifique a situação junto ao órgão emissor, tome as providências necessárias para regularizar e nos envie o documento válido e sem pendências em até 5 (cinco) dias úteis a partir do recebimento desta mensagem. No caso de certidões de débitos, também é aceita a certidão positiva com efeitos de negativa.\n\n" + (item.link ? "Link para emissão ou consulta: " + item.link + "\n\n" : "") + "A falta do documento impede a comprovação da regularidade exigida pela Lei nº 14.133/2021 e pode inviabilizar a contratação.\n\nFicamos à disposição para esclarecimentos.\n\nAtenciosamente,\n[Nome]\n[Nome da unidade], Secretaria Municipal da Cultura\n[telefone] / [e-mail]"]);
+        "Assunto: Pendência na documentação para contratação, " + nomeDoc + "\n\nOlá, [nome].\n\nNa conferência da documentação para a sua contratação pelo [nome do órgão], não foi possível obter ou validar o seguinte documento:\n\n" + nomeDoc + ", referente ao [CNPJ/CPF nº].\n\nMotivo: [ex.: a certidão foi emitida como positiva / o site do órgão emissor indicou pendência / não foi possível emitir o documento pelo site].\n\nPara seguirmos com o processo, solicitamos que você verifique a situação junto ao órgão emissor, tome as providências necessárias para regularizar e nos envie o documento válido e sem pendências em até 5 (cinco) dias úteis a partir do recebimento desta mensagem. No caso de certidões de débitos, também é aceita a certidão positiva com efeitos de negativa.\n\n" + (item.link ? "Link para emissão ou consulta: " + item.link + "\n\n" : "") + "A falta do documento impede a comprovação da regularidade exigida pela Lei nº 14.133/2021 e pode inviabilizar a contratação.\n\nFicamos à disposição para esclarecimentos.\n\nAtenciosamente,\n[Nome]\n[Nome da unidade], [Nome do órgão]\n[telefone] / [e-mail]"]);
     }
     if(d.meuModelo) extras.push(["Seu modelo de texto", "Escrito por você (Editar esta explicação).", d.meuModelo]);
     extras.forEach(function(x){ if(!x[2]) sec(x[0], x[1], true); });
