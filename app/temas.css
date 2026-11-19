@@ -1,0 +1,100 @@
+/* Estrutura comum aos temas da v5 (Caderno, Partitura, Didático). Projeto: Design/base.css.
+   Nada aqui vale no Clássico. Cada tema (caderno.css, partitura.css, didatico.css) define as variáveis e o caráter:
+   --fonte --tit --lado-w --lado --lado-tx --lado-suave --lado-hover --lado-ativo --lado-ativo-tx --borda-f --hover --raio --raio-g,
+   além das do estilo.css (--fundo --painel --margem --texto --suave --borda --primaria… ).
+   A folha (.sei) e o que é copiado para o SEI/Diário Oficial não são tocados. */
+:where(:root[data-tema="caderno"], :root[data-tema="partitura"], :root[data-tema="didatico"]) {
+  /* ── moldura: o cabeçalho vira a coluna da esquerda ── */
+  & body { display: grid; grid-template-columns: var(--lado-w, 236px) minmax(0, 1fr); grid-template-rows: auto auto minmax(0, 1fr);
+    font-family: var(--fonte); font-size: var(--fs, 14px); -webkit-font-smoothing: antialiased; }
+  & body > * { grid-column: 2; }
+  & #barraProcesso { grid-row: 1; } & #progresso { grid-row: 2; } & main { grid-row: 3; }
+  & h1, & h2, & legend, & .logo, & #soltarTela > div { font-family: var(--tit, var(--fonte)); letter-spacing: -.012em; }
+  & h1, & h2, & legend { font-weight: 650; }
+
+  & .topo { grid-column: 1; grid-row: 1 / -1; flex-direction: column; align-items: stretch; gap: 6px; padding: 18px 12px 14px; min-height: 0; overflow: auto;
+    background: var(--lado); color: var(--lado-tx); border-bottom: 0; border-right: 1px solid var(--lado-borda, var(--borda)); }
+  & .marca { padding: 2px 8px 16px; }
+  & .logo { font-size: 19px; font-weight: 700; color: var(--lado-tx); }
+  & .versao { color: var(--lado-suave); }
+  & #abasApp { flex-direction: column; gap: 2px; margin: 0; }
+  & #abasApp button, & .topo-acoes .btn { width: 100%; justify-content: flex-start; gap: 10px; padding: 9px 10px; border: 0; border-radius: var(--raio);
+    background: none; color: var(--lado-tx); font-weight: 550; }
+  & #abasApp button:hover, & .topo-acoes .btn:hover { background: var(--lado-hover); color: var(--lado-tx); }
+  & #abasApp button[aria-selected="true"], & #btConfig[aria-pressed="true"] { background: var(--lado-ativo); color: var(--lado-ativo-tx); font-weight: 650; }
+  & #abasApp .aba-ic, & .topo-acoes .ic { display: block; width: 17px; height: 17px; opacity: .8; }
+  & #abasApp button[aria-selected="true"] .aba-ic { opacity: 1; }
+  & .aba-t { flex: 1; min-width: 0; text-align: left; }
+  & .so-tema { display: inline; }
+  & .topo-acoes { margin-top: auto; display: grid; gap: 4px; padding-top: 14px; }
+  & .topo .cont { background: none; color: var(--lado-suave); font-weight: 600; }
+  & .topo .cont.alerta { background: var(--ouro-suave); color: var(--ouro); }
+  & .local { display: flex; gap: 7px; margin: 8px 0 0; padding: 0 10px; font-size: 12px; line-height: 1.4; color: var(--lado-suave); }
+  & .local .ic { width: 13px; height: 13px; margin-top: 2px; opacity: 1; }
+
+  /* ── barra do processo, progresso, peças ── */
+  & .barra-proc { padding: 12px 24px; background: var(--painel); }
+  & #progresso { padding: 7px 24px; }
+  & .chip { background: var(--hover); }
+  & .btn { border-color: var(--borda-f); border-radius: var(--raio); }
+  & .btn:hover { border-color: var(--borda-f); background: var(--hover); }
+  & .btn.primario:hover { background: var(--primaria); filter: brightness(1.1); }
+  & .btn:disabled:hover { background: var(--painel); }
+  & .busca, & select, & .rotulo input, & #dlgEntrada, & .campo input, & .campo textarea { border-color: var(--borda-f); border-radius: var(--raio); }
+  & .menu > div, & dialog { border-radius: var(--raio-g); }
+  & .menu > div .btn { background: none; }
+  & .menu > div .btn:hover { background: var(--hover); }
+  & .aviso { border-color: transparent; border-radius: var(--raio); }
+  & .vista { padding: 26px 32px 44px; }
+  & .proc:hover { background: var(--hover); }
+  & #indiceGrupos a:hover { background: var(--hover); }
+  & .trava { font-family: var(--fonte); border-color: var(--borda-f); }
+  & .chk-status { padding-inline: 24px; }
+  & .gaveta { background: var(--fundo); }
+  & .grupo-vazio { border-color: var(--borda-f); }
+  & .temas button { border-radius: var(--raio-g); }
+  & .segm { background: var(--hover); border-color: transparent; }
+  & .ponto { border: 0; border-radius: var(--raio); margin-bottom: 6px; padding: 10px 14px; }
+  & .ponto.erro { background: var(--erro-suave); } & .ponto.aviso { background: var(--ouro-suave); } & .ponto.lembrete { background: var(--dopa-suave); color: var(--texto); }
+  & .ponto.lembrete .ic { color: var(--dopa); } & .ponto.ok { background: var(--ok-suave); }
+  /* a coluna do meio é mais estreita que no Clássico: "Marcar como feito" e "Código-fonte" viram só ícone
+     (o texto continua lá para leitor de tela; "Feito" aparece quando marcado) */
+  & #btFeito:not(.marcado) span, & #btCopiarFonte span { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+  & #btFeito:not(.marcado), & #btCopiarFonte { padding-inline: 9px; }
+
+  /* ── leitura: a tela inteira acompanha; o palco (lista, pauta, leitor) é de cada tema ── */
+  & .leitura-tela { display: grid; place-items: center; position: absolute; inset: 0; z-index: 10; background: var(--fundo); }
+  & .leitura-tela[hidden] { display: none; }
+  & .leitura { width: min(560px, 90%); text-align: center; }
+  & .leitura .sub { margin: 6px auto 18px; font-variant-numeric: tabular-nums; }
+  & .lt-barra { height: 4px; border-radius: 4px; background: var(--hover); overflow: hidden; }
+  & .lt-barra i { display: block; height: 100%; width: 0; background: var(--primaria); transition: width .25s; }
+  & .lt-arq { margin-top: 14px; color: var(--suave); min-height: 1.5em; font-size: 13px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  & #progresso:has(~ main .leitura-tela:not([hidden])) { display: none; }
+  & .lt-lista, & .pauta, & .scanner, & .lt-arq, & .lt-passos { display: none; }
+}
+
+/* ── Partitura e Didático: na tela Documentos a folha fica inteira; os dados abrem à direita e empurram a folha ── */
+:where(:root[data-tema="partitura"], :root[data-tema="didatico"]) {
+  & .vista.docs { position: relative; grid-template-columns: var(--c1, 290px) 7px minmax(0, 1fr); }
+  & .vista.docs > .divisa[data-col="2"] { display: none; }
+  & .so-painel, & .fecha-painel { display: inline-flex; }
+  & .painel-campos { display: block; position: absolute; top: 0; right: 0; bottom: 0; width: var(--painel-w, 390px); z-index: 5;
+    transform: translateX(105%); visibility: hidden; transition: transform .32s cubic-bezier(.2, .8, .2, 1), visibility 0s .32s; }
+  & .painel-aberto .painel-campos { transform: none; visibility: visible; transition: transform .32s cubic-bezier(.2, .8, .2, 1); }
+  & .centro { transition: margin-right .32s cubic-bezier(.2, .8, .2, 1); }
+  & .painel-aberto .centro { margin-right: var(--painel-w, 390px); }
+  & .painel-aberto #btDadosDoc { display: none; }
+  & .painel-campos > header { align-items: center; }
+  & .painel-campos > header .link { margin-left: auto; }
+}
+@media (max-width: 1150px) {
+  :where(:root[data-tema="caderno"], :root[data-tema="partitura"], :root[data-tema="didatico"]) body { grid-template-columns: 200px minmax(0, 1fr); }
+  :where(:root[data-tema="caderno"], :root[data-tema="partitura"], :root[data-tema="didatico"]) .barra-proc { flex-wrap: wrap; }
+  /* o painel recolhível cabe em tela estreita (o Clássico e o Caderno escondem a 3ª coluna) */
+  :where(:root[data-tema="partitura"], :root[data-tema="didatico"]) .painel-campos { display: block; --painel-w: 320px; }
+}
+
+/* v5.0.1: ponto com atalho para o arquivo (a caixa colorida continua no li) */
+:where(:root[data-tema="caderno"], :root[data-tema="partitura"], :root[data-tema="didatico"]) .ponto-ir { padding: 10px 14px; }
+:where(:root[data-tema="caderno"], :root[data-tema="partitura"], :root[data-tema="didatico"]) .ponto.lembrete .ponto-ir > .ic { color: var(--dopa); }

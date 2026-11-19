@@ -1,0 +1,92 @@
+/* Tema Didático (v5.0.0) — maior, arredondado, conduz quem chega agora: passos numerados, "como funciona",
+   dados do documento abrindo sozinhos quando falta algo. Projeto: Design/c.css. Estrutura comum em temas.css. */
+:root[data-tema="didatico"] {
+  --fs: 15.5px; --fonte: "Figtree", "Segoe UI", system-ui, sans-serif; --serifa: var(--fonte); --lado-w: 272px;
+  --fundo: #f5f6fa; --painel: #fff; --margem: #f5f6fa; --texto: #1c2233; --suave: #566077; --borda: #e3e6ee; --borda-f: #ccd2df; --hover: #eef0f6;
+  --lado: #fff; --lado-tx: #1c2233; --lado-suave: #5b6478; --lado-hover: #f1f4fb; --lado-ativo: #e9effd; --lado-ativo-tx: #1c44a8;
+  --primaria: #2553c9; --primaria-txt: #fff; --primaria-suave: #e9effd; --foco: #2553c9;
+  --ok: #166c47; --ok-suave: #dbf5e6; --ouro: #855000; --ouro-suave: #fff0cc; --erro: #b52d3a; --erro-suave: #ffe6e8; --dopa: #0d6478; --dopa-suave: #dcf2f6;
+  --raio: 12px; --raio-g: 18px; --painel-w: 380px;
+  --painel-sombra: 0 1px 2px rgba(28, 34, 51, .05), 0 6px 18px rgba(28, 34, 51, .05); --sombra: 0 22px 56px rgba(28, 34, 51, .2), 0 2px 8px rgba(28, 34, 51, .08);
+  color-scheme: light;
+}
+:root[data-tema="didatico"][data-modo="escuro"] {
+  --fundo: #12151f; --painel: #1b1f2c; --margem: #12151f; --texto: #e9ebf3; --suave: #a4abc0; --borda: #2b3042; --borda-f: #3d445c; --hover: #232838;
+  --lado: #171a26; --lado-tx: #e9ebf3; --lado-suave: #9aa2b8; --lado-hover: #20253a; --lado-ativo: #1f2c52; --lado-ativo-tx: #a9c1ff;
+  --primaria: #86a8ff; --primaria-txt: #0b1a44; --primaria-suave: #1f2c52; --foco: #86a8ff;
+  --ok: #7fd6a6; --ok-suave: #153026; --ouro: #f0c060; --ouro-suave: #3a2e12; --erro: #f59aa3; --erro-suave: #3f1f25; --dopa: #7fd0e0; --dopa-suave: #12313a;
+  --painel-sombra: 0 0 0 1px #2b3042; --sombra: 0 22px 56px rgba(0, 0, 0, .6), 0 2px 8px rgba(0, 0, 0, .4);
+  color-scheme: dark;
+}
+
+:where(:root[data-tema="didatico"]) {
+  & h1 { font-size: 27px; font-weight: 700; } & h2 { font-size: 17.5px; font-weight: 700; } & .inicio h1 { font-size: 38px; }
+  & .btn { border-radius: 999px; padding: 9px 15px; } & .btn.ico { padding: 9px; } & .busca { border-radius: 999px; padding-inline: 14px; }
+  & .cont { font-size: 12.5px; } & .chip { font-size: 12.5px; padding: 4px 11px; }
+  & .dica, & .campo label, & .rotulo, & .cert small, & .campo .fonte { font-size: 13px; }
+  & .marca { align-items: center; gap: 10px; }
+  & .logo-m { display: grid; place-items: center; width: 34px; height: 34px; border-radius: 11px; background: var(--primaria); color: var(--primaria-txt); font-weight: 800; font-size: 18px; }
+  & .logo { font-size: 21px; }
+  & .barra-proc { border-bottom: 0; box-shadow: 0 1px 0 var(--borda); }
+
+  /* a coluna lateral mostra o caminho: quatro passos numerados, com uma linha de explicação */
+  & #abasApp { gap: 6px; position: relative; isolation: isolate; }
+  & #abasApp::before { content: ""; position: absolute; z-index: -1; left: 24px; top: 30px; bottom: 30px; width: 2px; background: var(--borda); }
+  & #abasApp button { padding: 10px; align-items: center; }
+  & #abasApp .aba-ic { display: none; }
+  & #abasApp .passo { display: grid; place-items: center; width: 30px; height: 30px; flex: none; border-radius: 50%; background: var(--painel);
+    border: 2px solid var(--borda-f); font-weight: 700; font-size: 14px; color: var(--suave); transition: background .2s, border-color .2s; }
+  & #abasApp button[aria-selected="true"] .passo { background: var(--primaria); border-color: var(--primaria); color: var(--primaria-txt); }
+  & .aba-t small { display: block; font-weight: 400; font-size: 12.5px; color: var(--lado-suave); line-height: 1.3; }
+
+  /* início: área de soltar em destaque e "como funciona" em três passos */
+  & .soltar { border-width: 2px; padding-block: 44px; background: var(--primaria-suave); border-color: color-mix(in srgb, var(--primaria) 35%, transparent); border-radius: var(--raio-g); }
+  & .soltar strong { font-size: 19px; }
+  & .como { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; margin: 22px 0 0; padding: 0; list-style: none; counter-reset: p; }
+  & .como li { counter-increment: p; background: var(--painel); border-radius: var(--raio-g); padding: 16px; box-shadow: var(--painel-sombra); color: var(--suave); font-size: 14px; display: grid; gap: 2px; align-content: start; }
+  & .como li::before { content: counter(p); width: 26px; height: 26px; border-radius: 50%; background: var(--primaria-suave); color: var(--primaria); font-weight: 700; display: grid; place-items: center; margin-bottom: 6px; }
+  & .como b { color: var(--texto); font-size: 15.5px; }
+  & .inicio .soltar { margin-top: 18px; }
+
+  /* cartões com sombra */
+  & .painel, & .lista-proc li { border: 0; border-radius: var(--raio-g); background: var(--painel); box-shadow: var(--painel-sombra); }
+  & .painel > header { padding: 16px 20px; }
+  & .lista-proc { background: none; border: 0; display: grid; gap: 10px; overflow: visible; }
+  & .lista-proc li { overflow: hidden; }
+  & .proc { padding: 14px 16px; }
+  & .ponto { padding: 12px 14px; }
+  & .proc .p-info .chip { background: var(--hover); }
+  & .proc .p-info .chip.alerta { background: var(--ouro-suave); } & .proc .p-info .chip.erro { background: var(--erro-suave); }
+
+  /* Documentos: a folha inteira à vista; os dados abrem à direita (sozinhos quando falta algo) */
+  & .vista.docs { --c1: 300px; }
+  & .lista-modelos { background: var(--painel); }
+  & #abasModelos button { padding: 9px 12px; }
+  & .doc-barra { background: none; border: 0; padding: 20px 28px 4px; }
+  & .doc-nome h1 { font-size: 23px; }
+  & #docAvisos > * { margin-inline: 28px; }
+  & .centro { background: var(--margem); }
+  & .mesa { padding: 18px 28px 60px; }
+  & .mesa > .sei { border: 0; border-radius: 10px; box-shadow: var(--painel-sombra); }
+  & .painel-campos { border-left: 1px solid var(--borda); }
+  & .painel-campos > header h2 { font-size: 16.5px; }
+  & .grupo-ok { border-top: 1px solid var(--borda); padding-top: 10px; }
+  & .grupo-ok summary { cursor: pointer; font-weight: 650; display: flex; align-items: center; gap: 8px; padding: 4px 0; }
+  & .grupo-ok[open] summary { margin-bottom: 10px; }
+  & .grupo-ok > .campo + .campo { margin-top: 12px; }
+
+  /* leitura: um documento passando pelo leitor e os passos */
+  & .scanner { display: grid; place-items: center; margin: 30px 0 4px; }
+  & .folhinha { position: relative; width: 116px; height: 146px; border-radius: 16px; background: #fff; box-shadow: var(--sombra); display: grid; place-items: center;
+    color: #2553c9; overflow: hidden; animation: dd-flutua 2.4s ease-in-out infinite; }
+  & .folhinha b { position: absolute; left: 0; right: 0; height: 34px; background: linear-gradient(transparent, rgba(37, 83, 201, .22)); border-bottom: 3px solid #2553c9;
+    animation: dd-leitor 1.1s ease-in-out infinite alternate; }
+  & .lt-arq { display: block; }
+  & .lt-barra { height: 8px; border-radius: 8px; }
+  & .lt-passos { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin: 20px 0 0; padding: 0; list-style: none; }
+  & .lt-passos li { padding: 10px 6px; border-radius: 12px; background: var(--hover); color: var(--suave); font-size: 13px; font-weight: 600; }
+  & .lt-passos .agora { background: var(--primaria-suave); color: var(--primaria); animation: dd-respira 1s infinite; }
+}
+@keyframes dd-leitor { from { top: -34px; } to { top: calc(100% - 34px); } }
+@keyframes dd-flutua { 50% { transform: translateY(-6px); } }
+@keyframes dd-respira { 50% { opacity: .65; } }

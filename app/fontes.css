@@ -1,0 +1,6 @@
+/* Fontes dos temas da v5 (licença OFL, em lib/fontes/LICENCA-OFL.txt). Variáveis (um arquivo cobre todos os pesos),
+   só o alfabeto latino. O navegador só carrega a fonte quando um tema a usa; o Clássico usa as do sistema. */
+@font-face { font-family: "Hanken Grotesk"; src: url("lib/fontes/hanken-grotesk-latin-wght-normal.woff2") format("woff2"); font-weight: 100 900; font-display: swap; }
+@font-face { font-family: "Bricolage Grotesque"; src: url("lib/fontes/bricolage-grotesque-latin-wght-normal.woff2") format("woff2"); font-weight: 500 800; font-display: swap; }
+@font-face { font-family: "Instrument Sans"; src: url("lib/fontes/instrument-sans-latin-wght-normal.woff2") format("woff2"); font-weight: 400 700; font-display: swap; }
+@font-face { font-family: "Figtree"; src: url("lib/fontes/figtree-latin-wght-normal.woff2") format("woff2"); font-weight: 400 800; font-display: swap; }

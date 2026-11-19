@@ -1,0 +1,77 @@
+/* Tema Partitura (v5.0.0) — coluna azul-noite, luz âmbar, títulos com caráter. A folha é a protagonista.
+   Projeto: Design/b.css. Estrutura comum e painel de dados recolhível em temas.css. Só vale com data-tema="partitura". */
+:root[data-tema="partitura"] {
+  --fonte: "Instrument Sans", "Segoe UI", system-ui, sans-serif; --tit: "Bricolage Grotesque", "Segoe UI", system-ui, sans-serif; --serifa: var(--tit); --lado-w: 252px;
+  --fundo: #f2f3f7; --painel: #fff; --margem: #e4e7f0; --texto: #161a2c; --suave: #555b73; --borda: #e2e5ee; --borda-f: #cdd2e0; --hover: #eceef5;
+  --lado: #141829; --lado-tx: #e8e9f1; --lado-suave: #a7abc2; --lado-hover: rgba(255, 255, 255, .07); --lado-ativo: rgba(255, 255, 255, .1); --lado-ativo-tx: #ffc965; --lado-borda: transparent;
+  --primaria: #1e2748; --primaria-txt: #fff; --primaria-suave: #fff1d2; --foco: #1e2748; --ambar: #ffc965;
+  --ok: #1f6b47; --ok-suave: #e0f2e8; --ouro: #7f5000; --ouro-suave: #ffefc9; --erro: #b0302e; --erro-suave: #fce8e6; --dopa: #2c4fa3; --dopa-suave: #e6ecfb;
+  --raio: 9px; --raio-g: 16px; --painel-sombra: 0 1px 2px rgba(20, 24, 41, .06), 0 10px 28px rgba(20, 24, 41, .05);
+  --sombra: 0 24px 60px rgba(14, 17, 32, .28), 0 2px 8px rgba(14, 17, 32, .1);
+  color-scheme: light;
+}
+/* escuro: o âmbar passa a ser a cor de ação */
+:root[data-tema="partitura"][data-modo="escuro"] {
+  --fundo: #0f1220; --painel: #181c2e; --margem: #0a0c16; --texto: #e8e9f1; --suave: #a3a8c0; --borda: #2a2f47; --borda-f: #3c4263; --hover: #21263c;
+  --lado: #0a0c16; --primaria: #ffc965; --primaria-txt: #2a1c00; --primaria-suave: #3a2f14; --foco: #ffc965;
+  --ok: #7fd3a4; --ok-suave: #15302a; --ouro: #f0c060; --ouro-suave: #3a2e12; --erro: #f29b97; --erro-suave: #3d1f22; --dopa: #9db4f5; --dopa-suave: #1c2547;
+  --painel-sombra: 0 0 0 1px #262b42; --sombra: 0 24px 60px rgba(0, 0, 0, .6), 0 2px 8px rgba(0, 0, 0, .4);
+  color-scheme: dark;
+}
+
+:where(:root[data-tema="partitura"]) {
+  & h1 { font-size: 30px; font-weight: 700; letter-spacing: -.03em; }
+  & h2 { font-size: 18px; font-weight: 700; letter-spacing: -.015em; }
+  & .inicio h1 { font-size: 44px; }
+  & .topo { padding: 22px 14px 16px; }
+  & .marca { padding-bottom: 22px; }
+  & .logo { font-size: 27px; letter-spacing: -.04em; }
+  & .logo::after { content: "."; color: var(--ambar); }
+  & .topo .cont { background: rgba(255, 255, 255, .12); color: var(--lado-tx); }
+  & .topo .cont.alerta { background: var(--ambar); color: #3a2700; }
+  & .local .ic { color: var(--ambar); }
+  & .btn.primario .ic { color: var(--ambar); }
+  & .barra-proc { border-bottom: 0; box-shadow: 0 1px 0 var(--borda); }
+
+  /* cartões com sombra no lugar de bordas */
+  & .painel, & .lista-proc li { border: 0; border-radius: var(--raio-g); background: var(--painel); box-shadow: var(--painel-sombra); }
+  & .painel > header { padding: 16px 20px; }
+  & .lista-proc { background: none; border: 0; display: grid; gap: 10px; overflow: visible; }
+  & .lista-proc li { overflow: hidden; transition: box-shadow .15s; }
+  & .lista-proc li:hover { box-shadow: 0 8px 22px rgba(20, 24, 41, .1); }
+  & .soltar { border: 0; box-shadow: var(--painel-sombra); padding-block: 46px; border-radius: var(--raio-g); }
+  & .soltar .ic.grande { color: #b97a00; }
+  & .proc .p-info .chip { background: var(--hover); }
+  & .proc .p-info .chip.alerta { background: var(--ouro-suave); } & .proc .p-info .chip.erro { background: var(--erro-suave); }
+
+  /* Documentos: lista + folha; os dados abrem por cima, à direita */
+  & .lista-modelos { background: var(--painel); }
+  & #abasModelos button[aria-selected="true"] { box-shadow: inset 0 0 0 1px #f0ce85; }
+  & .doc-barra { border-bottom: 0; background: var(--margem); padding-top: 20px; }
+  & .doc-nome h1 { font-size: 26px; }
+  & .centro { background: var(--margem); }
+  & .mesa { background: radial-gradient(720px 360px at 50% 0, #f8f9fc, transparent 70%) var(--margem); padding-top: 26px; }
+  & .mesa > .sei { border: 0; box-shadow: 0 1px 2px rgba(20, 24, 41, .08), 0 22px 50px rgba(20, 24, 41, .14); padding: 44px 56px; }
+  & .painel-campos { box-shadow: var(--sombra); }
+
+  /* leitura: o palco escurece e cada arquivo lido vira uma nota na pauta */
+  & .leitura-tela { background: #141829; color: #fff; }
+  & .leitura-tela h1 { font-size: 36px; color: #fff; }
+  & .leitura-tela .sub, & .leitura-tela .lt-arq { color: #a7abc2; }
+  & .lt-arq { display: block; }
+  & .lt-barra { background: rgba(255, 255, 255, .12); } & .lt-barra i { background: var(--ambar); }
+  & .pauta { display: block; position: relative; height: 96px; margin: 56px 0 44px; }
+  & .pauta i { position: absolute; left: 0; right: 0; height: 1px; background: rgba(255, 255, 255, .3); }
+  & .pauta i:nth-child(1) { top: 0; } & .pauta i:nth-child(2) { top: 25%; } & .pauta i:nth-child(3) { top: 50%; } & .pauta i:nth-child(4) { top: 75%; } & .pauta i:nth-child(5) { top: 100%; }
+  & .nota-m { position: absolute; width: 17px; height: 12px; margin: -6px 0 0 -8px; border-radius: 50%; background: var(--ambar); rotate: -22deg; animation: pt-nota .45s cubic-bezier(.2, 1.5, .4, 1) both; }
+  & .nota-m::after { content: ""; position: absolute; right: 0; bottom: 6px; width: 1.6px; height: 38px; background: var(--ambar); rotate: 22deg; transform-origin: bottom; }
+  & .nota-m.baixo::after { right: auto; left: 0; bottom: auto; top: 6px; transform-origin: top; }
+}
+:where(:root[data-tema="partitura"][data-modo="escuro"]) {
+  & .btn.primario .ic { color: inherit; }
+  & .soltar .ic.grande { color: var(--ambar); }
+  & .mesa { background: var(--margem); }
+  & #abasModelos button[aria-selected="true"] { box-shadow: inset 0 0 0 1px #7a5e1e; }
+  & .lista-proc li:hover { box-shadow: 0 0 0 1px var(--borda-f); }
+}
+@keyframes pt-nota { from { opacity: 0; scale: .2; translate: 0 -26px; } }

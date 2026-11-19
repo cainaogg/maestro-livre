@@ -1,0 +1,6 @@
+# zips gerados por ferramentas/gerar-zip.ps1 (publicar em Releases, não no repositório)
+releases/
+# processos reais nunca entram no repositório
+*.zip
+node_modules/
+.claude/

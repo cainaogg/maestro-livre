@@ -1,0 +1,63 @@
+/* Tema Caderno (v5.0.0) — calmo, neutro, um só acento; seções separadas por fios, quase sem caixas.
+   Projeto: Design/a.css. A estrutura comum (coluna lateral, leitura) está em temas.css; aqui, cores e caráter.
+   Só vale com <html data-tema="caderno">: o Clássico não muda. */
+:root[data-tema="caderno"] {
+  --fonte: "Hanken Grotesk", "Segoe UI", system-ui, sans-serif; --serifa: var(--fonte); --lado-w: 236px;
+  --fundo: #fff; --painel: #fff; --margem: #f4f4f1; --texto: #1b1d1c; --suave: #5d6460; --borda: #e8e8e4; --borda-f: #d5d5cf; --hover: #f2f2ef;
+  --lado: #f7f7f5; --lado-tx: #1b1d1c; --lado-suave: #636a66; --lado-hover: #eeeeea; --lado-ativo: #e7e7e2; --lado-ativo-tx: #17392f;
+  --primaria: #2f5d4f; --primaria-txt: #fff; --primaria-suave: #e6efea; --foco: #2f5d4f;
+  --ok: #256a41; --ok-suave: #e4f1e8; --ouro: #855600; --ouro-suave: #fbf1d9; --erro: #a8322c; --erro-suave: #fbe9e7; --dopa: #2d5b8e; --dopa-suave: #e8eff7;
+  --raio: 7px; --raio-g: 10px; --sombra: 0 18px 50px rgba(20, 25, 22, .16), 0 2px 8px rgba(20, 25, 22, .08);
+  color-scheme: light;
+}
+:root[data-tema="caderno"][data-modo="escuro"] {
+  --fundo: #171918; --painel: #171918; --margem: #0f1110; --texto: #e8eae8; --suave: #a0a8a3; --borda: #2a2e2c; --borda-f: #3c423f; --hover: #232725;
+  --lado: #111312; --lado-tx: #e8eae8; --lado-suave: #98a09b; --lado-hover: #1c1f1e; --lado-ativo: #262a28; --lado-ativo-tx: #a9d8c4;
+  --primaria: #7fc0a6; --primaria-txt: #0e1f18; --primaria-suave: #1f2e28; --foco: #7fc0a6;
+  --ok: #7fcf9b; --ok-suave: #1b2b21; --ouro: #e2b55e; --ouro-suave: #322915; --erro: #f09a92; --erro-suave: #3a1f1d; --dopa: #8fb8e8; --dopa-suave: #1a2735;
+  --sombra: 0 18px 50px rgba(0, 0, 0, .55), 0 2px 8px rgba(0, 0, 0, .4);
+  color-scheme: dark;
+}
+
+:where(:root[data-tema="caderno"]) {
+  & .marca::before { content: ""; width: 9px; height: 9px; border-radius: 3px; background: var(--primaria); align-self: center; }
+  & .gaveta { background: var(--painel); }
+
+  /* telas: fios no lugar de caixas */
+  & .painel { background: none; border: 0; border-top: 1px solid var(--borda); border-radius: 0; }
+  & .painel > header { padding: 20px 0 12px; border-bottom: 0; }
+  & .painel > .dica { padding: 10px 0 0; }
+  & .conf-grade, & .arq-grade { gap: 44px; }
+  & .conf-lado { border-left: 0; padding: 0; }
+  & .cert, & #listaDocs summary { padding-inline: 0; }
+  & #listaDocs .detalhe { padding-left: 23px; padding-right: 0; }
+  & #listaDocs summary:hover { background: none; color: var(--primaria); }
+  & .cert.aviso-reler-cert { padding-inline: 12px; border-radius: var(--raio); }
+
+  /* início: lista de processos em cartões */
+  & .inicio { margin-top: 6vh; }
+  & .inicio h1 { font-size: 32px; font-weight: 600; }
+  & .soltar { background: none; border-color: var(--borda-f); border-radius: var(--raio-g); }
+  & .lista-proc { background: none; border: 0; border-radius: 0; display: grid; gap: 8px; overflow: visible; }
+  & .lista-proc li, & .lista-proc li:last-child { border: 1px solid var(--borda); border-radius: var(--raio-g); background: var(--painel); overflow: hidden; }
+  & .proc .p-info .chip { background: var(--hover); }
+  & .proc .p-info .chip.alerta { background: var(--ouro-suave); } & .proc .p-info .chip.erro { background: var(--erro-suave); }
+
+  /* Documentos: três colunas (como no Clássico); a folha sobre a "mesa" */
+  & .lista-modelos { background: var(--lado); }
+  & #abasModelos button:hover { background: var(--lado-hover); }
+  & .doc-barra { border-bottom: 0; background: var(--margem); }
+  & .centro { background: var(--margem); }
+  & .mesa > .sei { border: 0; box-shadow: 0 0 0 1px var(--borda), 0 6px 22px rgba(30, 35, 32, .06); }
+  & #conferenciaBalizadoras { border-color: var(--borda-f); }
+  & .painel-campos > header { padding: 16px 18px 12px; }
+
+  /* leitura: os arquivos entram na lista um a um, com o visto se desenhando */
+  & .lt-lista { display: grid; list-style: none; margin: 20px 0 0; padding: 0; text-align: left; height: 252px; overflow: hidden; align-content: end;
+    -webkit-mask: linear-gradient(transparent, #000 40%); mask: linear-gradient(transparent, #000 40%); }
+  & .lt-lista li { display: flex; gap: 10px; align-items: center; padding: 6px 2px; border-bottom: 1px solid var(--borda); animation: lt-sobe .3s ease-out; }
+  & .lt-lista li span { flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  & .lt-lista .ic { color: var(--ok); stroke-width: 2.6; stroke-dasharray: 26; animation: lt-traco .5s ease-out both; }
+}
+@keyframes lt-sobe { from { opacity: 0; transform: translateY(8px); } }
+@keyframes lt-traco { from { stroke-dashoffset: 26; } }

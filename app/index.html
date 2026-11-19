@@ -1,0 +1,360 @@
+<!doctype html>
+<html lang="pt-br">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Maestro Livre</title>
+<script src="tema.js"></script>
+<link rel="stylesheet" href="estilo.css">
+<!-- temas da v5: cada folha só vale com o seu data-tema no <html>; o Clássico é só o estilo.css -->
+<link rel="stylesheet" href="fontes.css">
+<link rel="stylesheet" href="temas.css">
+<link rel="stylesheet" href="caderno.css">
+<link rel="stylesheet" href="partitura.css">
+<link rel="stylesheet" href="didatico.css">
+</head>
+<body>
+<!-- Interface 2 (v4.0.0). Quatro telas: Arquivos · Dados · Documentos · Checklist.
+     Ícones: símbolos SVG abaixo, usados com <svg class="ic"><use href="#i-nome"/></svg> (no JS: ic('nome')). -->
+<svg hidden xmlns="http://www.w3.org/2000/svg">
+  <symbol id="i-zip" viewBox="0 0 24 24"><path d="M21 8v13H3V8M1 3h22v5H1zM10 12h4"/></symbol>
+  <symbol id="i-pasta" viewBox="0 0 24 24"><path d="M4 20h16a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.9a2 2 0 0 1-1.7-.9l-.8-1.2A2 2 0 0 0 7.9 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2z"/></symbol>
+  <symbol id="i-arquivo" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></symbol>
+  <symbol id="i-mais" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+  <symbol id="i-reler" viewBox="0 0 24 24"><path d="M21 12a9 9 0 1 1-2.6-6.4L21 8M21 3v5h-5"/></symbol>
+  <symbol id="i-salvar" viewBox="0 0 24 24"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><path d="M17 21v-8H7v8M7 3v5h8"/></symbol>
+  <symbol id="i-lixo" viewBox="0 0 24 24"><path d="M3 6h18M8 6V4h8v2M19 6l-1 14H6L5 6M10 11v6M14 11v6"/></symbol>
+  <symbol id="i-copiar" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></symbol>
+  <symbol id="i-codigo" viewBox="0 0 24 24"><path d="M16 18l6-6-6-6M8 6l-6 6 6 6"/></symbol>
+  <symbol id="i-editar" viewBox="0 0 24 24"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z"/></symbol>
+  <symbol id="i-pontos" viewBox="0 0 24 24"><circle cx="5" cy="12" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/></symbol>
+  <symbol id="i-ok" viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></symbol>
+  <symbol id="i-alerta" viewBox="0 0 24 24"><path d="M12 3L2 20h20L12 3z"/><path d="M12 10v4M12 17v.5"/></symbol>
+  <symbol id="i-relogio" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></symbol>
+  <symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 7.5v.5"/></symbol>
+  <symbol id="i-duvida" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M9.5 9.5a2.5 2.5 0 1 1 3.5 2.3c-.7.4-1 1-1 1.7M12 17v.5"/></symbol>
+  <symbol id="i-x" viewBox="0 0 24 24"><path d="M18 6L6 18M6 6l12 12"/></symbol>
+  <symbol id="i-cadeado" viewBox="0 0 24 24"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></symbol>
+  <symbol id="i-cadeado-aberto" viewBox="0 0 24 24"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 7.5-2"/></symbol>
+  <symbol id="i-busca" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></symbol>
+  <symbol id="i-seta" viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/></symbol><symbol id="i-sobe" viewBox="0 0 24 24"><path d="M6 15l6-6 6 6"/></symbol><symbol id="i-desce" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></symbol><symbol id="i-arrastar" viewBox="0 0 24 24"><path d="M9 6h.01M15 6h.01M9 12h.01M15 12h.01M9 18h.01M15 18h.01" stroke-width="3"/></symbol><symbol id="i-ordenar" viewBox="0 0 24 24"><path d="M7 20V4M3 8l4-4 4 4M17 4v16M13 16l4 4 4-4"/></symbol>
+  <symbol id="i-estrela" viewBox="0 0 24 24"><path d="M12 3l2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1L3.2 9.5l6.1-.9z"/></symbol>
+  <symbol id="i-feito" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M8 12.5l2.8 2.8L16 9.5"/></symbol>
+  <symbol id="i-engrenagem" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/></symbol>
+  <symbol id="i-grade" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 10h18M9 10v10"/></symbol>
+  <symbol id="i-lista" viewBox="0 0 24 24"><path d="M10 6h11M10 12h11M10 18h11M3 6l1.5 1.5L7 5M3 12l1.5 1.5L7 11M3 18l1.5 1.5L7 17"/></symbol>
+  <symbol id="i-gaveta" viewBox="0 0 24 24"><path d="M3 13l2.5-8h13L21 13v6a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1z"/><path d="M3 13h5l1.5 3h5L16 13h5"/></symbol>
+  <symbol id="i-livro" viewBox="0 0 24 24"><path d="M5 4h13a1 1 0 0 1 1 1v15H6.5A1.5 1.5 0 0 1 5 18.5z"/><path d="M5 18.5A1.5 1.5 0 0 1 6.5 17H19M9 8h6"/></symbol>
+  <symbol id="i-nova" viewBox="0 0 24 24"><rect x="8" y="2" width="8" height="4" rx="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2M12 11v6M9 14h6"/></symbol>
+</svg>
+
+<header class="topo">
+  <div class="marca">
+    <span class="logo-m" aria-hidden="true">M</span>
+    <span class="logo">Maestro <span class="logo-livre">Livre</span></span>
+    <small id="versao" class="versao" title="Versão do programa. Informe ao relatar um problema"></small>
+  </div>
+  <nav id="abasApp" role="tablist" aria-label="Telas">
+    <button type="button" role="tab" data-aba="arquivos" aria-selected="true"><span class="passo" aria-hidden="true">1</span><svg class="ic aba-ic" aria-hidden="true"><use href="#i-pasta"/></svg><span class="aba-t">Arquivos<small>Abrir e conferir</small></span> <span class="cont" id="contArquivos"></span></button>
+    <button type="button" role="tab" data-aba="dados" aria-selected="false"><span class="passo" aria-hidden="true">2</span><svg class="ic aba-ic" aria-hidden="true"><use href="#i-grade"/></svg><span class="aba-t">Dados<small>Revisar o que foi lido</small></span> <span class="cont alerta" id="contDados" title="Campos em que algum documento traz outro valor"></span></button>
+    <button type="button" role="tab" data-aba="documentos" aria-selected="false"><span class="passo" aria-hidden="true">3</span><svg class="ic aba-ic" aria-hidden="true"><use href="#i-arquivo"/></svg><span class="aba-t">Documentos<small>Preencher e copiar</small></span></button>
+    <button type="button" role="tab" data-aba="checklist" aria-selected="false" title="Os itens cujos documentos estão no processo são marcados sozinhos"><span class="passo" aria-hidden="true">4</span><svg class="ic aba-ic" aria-hidden="true"><use href="#i-lista"/></svg><span class="aba-t">Checklist<small>Acompanhar as etapas</small></span></button>
+    <button type="button" role="tab" data-aba="consulta" aria-selected="false" title="Leis, decretos, sistemas e links. A lista é sua: inclua, mude e exclua"><span class="passo" aria-hidden="true">5</span><svg class="ic aba-ic" aria-hidden="true"><use href="#i-livro"/></svg><span class="aba-t">Consulta<small>Leis, decretos e links</small></span></button>
+  </nav>
+  <div class="topo-acoes">
+    <button class="btn" id="btProcessos" type="button" title="Abrir, organizar em grupos, exportar e importar processos salvos">
+      <svg class="ic" aria-hidden="true"><use href="#i-pasta"/></svg><span class="aba-t">Processos salvos</span> <span class="cont" id="contProcessos"></span></button>
+    <button class="btn ico" id="btConfig" type="button" aria-pressed="false" title="Configurações: tema e aparência (claro ou escuro)" aria-label="Configurações">
+      <svg class="ic" aria-hidden="true"><use href="#i-engrenagem"/></svg><span class="aba-t so-tema">Configurações</span></button>
+    <p class="local so-tema"><svg class="ic" aria-hidden="true"><use href="#i-cadeado"/></svg>Tudo roda neste computador. Nada vai para a internet.</p>
+  </div>
+</header>
+
+<!-- Barra do processo aberto: sempre à vista -->
+<div id="barraProcesso" class="barra-proc" hidden>
+  <div class="proc-id">
+    <strong id="procTitulo"></strong>
+    <span id="procSub"></span>
+  </div>
+  <div class="proc-chips" id="procChips"></div>
+  <div class="proc-acoes">
+    <span id="estadoSalvo" class="dica"></span>
+    <button class="btn" id="btSalvarProc" type="button" title="Guarda o processo na lista de salvos (atualiza se já estiver lá)">
+      <svg class="ic" aria-hidden="true"><use href="#i-salvar"/></svg><span>Salvar</span></button>
+    <button class="btn" id="btReler" type="button" disabled>
+      <svg class="ic" aria-hidden="true"><use href="#i-reler"/></svg>Reler pasta</button>
+    <details class="menu"><summary class="btn ico" title="Mais opções do processo" aria-label="Mais opções do processo">
+      <svg class="ic" aria-hidden="true"><use href="#i-pontos"/></svg></summary>
+      <div>
+        <label class="rotulo">Grupo deste processo
+          <select id="selGrupoProc"></select></label>
+        <p class="dica" id="dicaGrupoProc"></p>
+        <hr>
+        <button class="btn" id="btResumo" type="button" title="Uma página com os dados, as certidões, os pontos de atenção e o que falta">
+          <svg class="ic" aria-hidden="true"><use href="#i-arquivo"/></svg>Resumo para imprimir</button>
+        <button class="btn" id="btNovo" type="button" title="Limpa documentos e dados para começar outro processo">
+          <svg class="ic" aria-hidden="true"><use href="#i-nova"/></svg>Novo processo (limpar a tela)</button>
+      </div>
+    </details>
+  </div>
+</div>
+<div id="progresso" hidden role="status" aria-live="polite"><div class="trilho"><i id="progressoBarra"></i></div><span id="statusLeitura"></span></div>
+
+<!-- seletores de arquivo (um de cada; os botões com data-abrir os acionam) -->
+<input type="file" id="inZip" accept=".zip,application/zip" hidden>
+<input type="file" id="inPasta" webkitdirectory multiple hidden>
+<input type="file" id="inArquivos" multiple hidden accept=".pdf,.png,.jpg,.jpeg,.webp,.bmp,.docx,.html,.htm,.txt,.zip">
+
+<main>
+  <!-- Leitura em andamento, nos temas novos (no Clássico basta a faixa #progresso). O palco muda com o tema. -->
+  <div id="leitura" class="leitura-tela" hidden role="status" aria-live="polite"><div class="leitura">
+    <h1>Lendo o processo</h1><p class="sub" id="ltCont"></p><div class="lt-barra"><i id="ltBarra"></i></div>
+    <ul class="lt-lista" id="ltLista"></ul>
+    <div class="pauta" id="ltPauta"><i></i><i></i><i></i><i></i><i></i></div>
+    <div class="scanner"><div class="folhinha"><svg class="ic grande" aria-hidden="true"><use href="#i-arquivo"/></svg><b></b></div></div>
+    <p class="lt-arq" id="ltArq"></p>
+    <ol class="lt-passos" id="ltPassos"><li class="agora">Lendo os arquivos</li><li>Achando os dados</li><li>Conferindo as certidões</li><li>Montando os documentos</li></ol>
+  </div></div>
+  <!-- ═══ Arquivos ═══ -->
+  <section class="vista" id="vArquivos" data-vista="arquivos">
+    <!-- sem processo aberto -->
+    <div id="inicio" class="inicio">
+      <h1>Abra um processo</h1>
+      <p class="sub">O Maestro lê os documentos, encontra os dados e preenche os documentos do SEI e os extratos do Diário Oficial.
+        Tudo acontece neste computador: nada é enviado para a internet.</p>
+      <ol class="como"><li><b>Solte o .zip</b>O programa lê cada documento e acha os dados.</li>
+        <li><b>Confira</b>Ele mostra o que achou, o que falta e o que não bate.</li>
+        <li><b>Copie para o SEI</b>Cada documento sai preenchido, pronto para colar.</li></ol>
+      <div id="soltar" class="soltar">
+        <svg class="ic grande" aria-hidden="true"><use href="#i-zip"/></svg>
+        <strong>Arraste para cá o .zip do processo</strong>
+        <span>É o arquivo que o SEI baixa. Não precisa extrair.</span>
+        <div class="soltar-botoes">
+          <button class="btn primario" type="button" data-abrir="zip"><svg class="ic" aria-hidden="true"><use href="#i-zip"/></svg>Escolher o .zip</button>
+          <button class="btn" type="button" data-abrir="pasta"><svg class="ic" aria-hidden="true"><use href="#i-pasta"/></svg>Abrir uma pasta</button>
+          <button class="btn" type="button" data-abrir="arquivos"><svg class="ic" aria-hidden="true"><use href="#i-arquivo"/></svg>Arquivos soltos</button>
+        </div>
+      </div>
+      <div id="recentes" hidden>
+        <div class="linha-titulo"><h2>Seus processos</h2><button class="link" type="button" id="btVerTodos">ver todos</button></div>
+        <ul id="listaRecentes" class="lista-proc"></ul>
+      </div>
+    </div>
+
+    <!-- com processo aberto -->
+    <div id="arquivos" hidden>
+      <div class="vista-topo">
+        <div><h1>Arquivos do processo</h1>
+          <p class="sub">O que foi lido e a validade das certidões. Para acrescentar documentos, arraste para a tela ou use os botões.</p></div>
+        <div class="acoes">
+          <button class="btn" type="button" data-abrir="arquivos"><svg class="ic" aria-hidden="true"><use href="#i-mais"/></svg>Adicionar arquivos</button>
+          <button class="btn" type="button" data-abrir="zip"><svg class="ic" aria-hidden="true"><use href="#i-zip"/></svg>Abrir outro .zip</button>
+          <button class="btn" type="button" data-abrir="pasta"><svg class="ic" aria-hidden="true"><use href="#i-pasta"/></svg>Abrir uma pasta</button>
+        </div>
+      </div>
+      <p id="avisoReler" class="aviso" hidden>Processo aberto da lista de salvos: os dados são os de quando foi salvo.
+        Para atualizar com documentos novos (contrato assinado, empenho…), abra o .zip do processo de novo
+        ou clique em <strong>Reler pasta</strong>. O que você corrigiu é mantido.</p>
+      <!-- Conferência: a varredura aplica as regras do Checklist (o que conferir em cada documento) -->
+      <section class="painel conferencia" id="painelConferencia" hidden>
+        <header><h2>Conferência do processo</h2><span id="confEtapa" class="dica"></span><span id="confResumo"></span></header>
+        <div class="conf-grade">
+          <ul id="listaPontos"></ul>
+          <div class="conf-lado">
+            <h3 title="Arquivo com nome genérico (ex.: &quot;Documento&quot;) pode não ser reconhecido: confira no Checklist">Não achei no processo <span class="cont alerta" id="contFaltam"></span></h3>
+            <ul id="listaFaltam"></ul>
+            <h3>Prazos</h3>
+            <ul id="listaPrazos"></ul>
+            <p class="dica">Dias úteis contam só sábado e domingo: confira os feriados.</p>
+          </div>
+        </div>
+      </section>
+      <div class="arq-grade">
+        <section class="painel" id="painelCertidoes" hidden>
+          <header><h2>Certidões e consultas</h2><span id="certResumo"></span></header>
+          <ul id="listaCertidoes"></ul>
+          <p class="dica">Validade lida do texto da certidão; quando não há, do nome do arquivo ("val. dd.mm.aaaa").
+            <span class="tag cd">Confirmação de despesa</span> = precisa estar válida também ao confirmar a despesa.</p>
+        </section>
+        <section class="painel">
+          <header><h2>Arquivos lidos <span class="cont" id="contDocs"></span></h2>
+            <label class="busca"><svg class="ic" aria-hidden="true"><use href="#i-busca"/></svg><input type="search" id="buscaDocs" placeholder="Filtrar por nome ou tipo" aria-label="Filtrar arquivos"></label></header>
+          <ul id="listaDocs"></ul>
+        </section>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ Dados ═══ -->
+  <section class="vista" id="vDados" data-vista="dados" hidden>
+    <div class="vista-topo">
+      <div><h1>Dados do processo</h1>
+        <p class="sub">Confira e corrija. O que você editar não é trocado quando os documentos forem relidos.</p></div>
+      <div class="acoes">
+        <label class="busca"><svg class="ic" aria-hidden="true"><use href="#i-busca"/></svg><input type="search" id="buscaCampos" placeholder="Buscar um dado (ex.: CNPJ, valor)" aria-label="Buscar um dado"></label>
+        <label class="chave"><input type="checkbox" id="soVazios"> Só os vazios</label>
+        <label class="chave"><input type="checkbox" id="soAlertas"> Só com aviso</label>
+      </div>
+    </div>
+    <div class="dados-grade">
+      <nav id="indiceGrupos" aria-label="Categorias"></nav>
+      <form id="campos" autocomplete="off"></form>
+    </div>
+  </section>
+
+  <!-- ═══ Documentos ═══ -->
+  <section class="vista docs" id="vDocumentos" data-vista="documentos" hidden>
+    <aside class="lista-modelos"><nav id="abasModelos" aria-label="Modelos de documento"></nav></aside>
+    <div class="divisa" data-col="1" role="separator" aria-orientation="vertical" title="Arraste para mudar a largura (duplo clique volta ao padrão)"></div>
+
+    <div class="centro">
+      <div class="doc-barra">
+        <div class="doc-nome"><h1 id="docTitulo"></h1><span id="docDestino" class="dica"></span></div>
+        <div class="icones">
+          <button class="btn" id="btFeito" type="button"><svg class="ic" aria-hidden="true"><use href="#i-feito"/></svg><span>Marcar como feito</span></button>
+          <button class="btn" id="btProximo" type="button" title="Vai para o próximo documento ainda não resolvido neste processo"><span>Próximo</span><svg class="ic" aria-hidden="true"><use href="#i-seta"/></svg></button>
+          <button class="btn so-painel" id="btDadosDoc" type="button" title="Abre os dados que este documento usa"><svg class="ic" aria-hidden="true"><use href="#i-grade"/></svg>Dados <span class="cont alerta" id="contDadosDoc"></span></button>
+          <button class="btn primario" id="btCopiar" type="button">
+            <svg class="ic" aria-hidden="true"><use href="#i-copiar"/></svg><span id="btCopiarTxt">Copiar para o SEI</span></button>
+          <!-- código-fonte (HTML como texto) para colar no modo "Fonte" do editor. No Diário Oficial a colagem normal
+               perde alinhamento/tamanho (filtro do CKEditor de lá); no SEI é opcional. -->
+          <button class="btn" id="btCopiarFonte" type="button">
+            <svg class="ic" aria-hidden="true"><use href="#i-codigo"/></svg><span>Código-fonte</span></button>
+          <button class="btn ico" id="btEditar" type="button" title="Editar este modelo" aria-label="Editar este modelo">
+            <svg class="ic" aria-hidden="true"><use href="#i-editar"/></svg></button>
+          <details class="menu"><summary class="btn ico" title="Mais opções (novo modelo, duplicar, excluir, exportar…)" aria-label="Mais opções de modelos">
+            <svg class="ic" aria-hidden="true"><use href="#i-pontos"/></svg></summary>
+            <div>
+              <button class="btn" id="btNovoModelo" type="button">Novo modelo</button>
+              <button class="btn" id="btDuplicar" type="button">Duplicar este modelo</button>
+              <button class="btn" id="btExcluir" type="button">Excluir este modelo</button>
+              <hr>
+              <button class="btn" id="btExportar" type="button">Exportar modelos (.json)</button>
+              <label class="btn">Importar modelos<input type="file" id="inImportar" accept=".json" hidden></label>
+              <button class="btn" id="btRestaurar" type="button">Restaurar modelos de fábrica</button>
+            </div>
+          </details>
+        </div>
+      </div>
+      <div id="docAvisos">
+        <div id="avisoFaltando" class="aviso" hidden></div>
+        <ul id="conferenciaBalizadoras" hidden></ul>
+      </div>
+      <div class="mesa">
+        <!-- visualização -->
+        <article id="previa" class="sei"></article>
+        <!-- edição -->
+        <div id="editor" hidden>
+          <div class="ed-topo">
+            <label class="rotulo">Nome do modelo <input id="edNome"></label>
+            <label class="rotulo">Onde aparece <select id="edGrupo"><option value="sei">Documentos SEI</option><option value="despacho">Despachos</option><option value="extrato">Extratos</option></select></label>
+          </div>
+          <p class="dica">Copie o corpo de um documento pronto no SEI e cole abaixo: a formatação do SEI vem junto.
+            Depois troque os trechos que mudam pelos campos (clique num campo para inserir onde está o cursor).
+            <code>{{CAMPO|min}}</code> = 1ª letra minúscula · <code>{{CAMPO|mai}}</code> = tudo maiúsculo.</p>
+          <label class="busca"><svg class="ic" aria-hidden="true"><use href="#i-busca"/></svg><input type="search" id="buscaChips" placeholder="Procurar campo para inserir" aria-label="Procurar campo para inserir"></label>
+          <div id="chips"></div>
+          <div id="edCorpo" class="sei" contenteditable="true"></div>
+          <details><summary>Ver ou editar o HTML</summary><textarea id="edHtml" rows="10"></textarea></details>
+          <div class="barra">
+            <button class="btn primario" id="btSalvarModelo" type="button">Salvar modelo</button>
+            <button class="btn" id="btCancelar" type="button">Cancelar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="divisa" data-col="2" role="separator" aria-orientation="vertical" title="Arraste para mudar a largura (duplo clique volta ao padrão)"></div>
+    <aside class="painel-campos">
+      <header><h2>Dados deste documento</h2><button class="link" type="button" data-ir="dados">ver todos os dados</button>
+        <button class="btn ico fecha-painel" type="button" id="btFecharDados" title="Fechar os dados" aria-label="Fechar os dados"><svg class="ic" aria-hidden="true"><use href="#i-x"/></svg></button></header>
+      <form id="camposDoc" autocomplete="off"></form>
+    </aside>
+  </section>
+
+  <!-- ═══ Checklist: o Checklist de Inexigibilidade (página própria) num quadro; conversa por mensagens ═══ -->
+  <section class="vista" id="abaChecklist" data-vista="checklist" hidden>
+    <p id="chkStatus" class="chk-status"></p>
+    <iframe id="frChecklist" title="Checklist de Inexigibilidade"></iframe>
+  </section>
+  <!-- Consulta (v5.0.0): legislação e links (consulta.js); as mudanças do usuário ficam à parte das de fábrica -->
+  <section class="vista consulta" id="vConsulta" data-vista="consulta" hidden>
+    <div class="vista-topo">
+      <div><h1>Consulta</h1><p class="sub">Legislação, sistemas e links usados nos processos de inexigibilidade. A lista é sua: inclua, mude e exclua o que quiser.</p></div>
+      <div class="acoes">
+        <label class="busca"><svg class="ic" aria-hidden="true"><use href="#i-busca"/></svg><input type="search" id="consBusca" placeholder="Buscar (ex.: 14.133, FGTS, PNCP)" aria-label="Buscar no material de consulta"></label>
+        <button class="btn" type="button" id="consEditar" aria-pressed="false"><svg class="ic" aria-hidden="true"><use href="#i-editar"/></svg><span>Editar a lista</span></button>
+      </div>
+    </div>
+    <div id="consAbas" class="cons-abas" role="tablist" aria-label="Abas da consulta"></div>
+    <div id="consAcoes" class="acoes cons-acoes" hidden></div>
+    <ul id="consLista" class="cons-lista"></ul>
+  </section>
+
+  <!-- Configurações (v5.0.0): tema e aparência; guardadas em localStorage "mlivre-config" (tema.js) -->
+  <section class="vista config" id="vConfig" data-vista="config" hidden>
+    <div class="pagina-cfg">
+      <div><h1>Configurações</h1><p class="sub">As escolhas ficam guardadas neste navegador.</p></div>
+      <section class="cfg-secao"><h2>Tema</h2><div class="temas" id="cfgTemas" role="radiogroup" aria-label="Tema"></div></section>
+      <section class="cfg-secao"><h2>Aparência</h2>
+        <div class="segm" id="cfgModo" role="radiogroup" aria-label="Aparência">
+          <button type="button" role="radio" data-modo="claro">Claro</button>
+          <button type="button" role="radio" data-modo="escuro">Escuro</button>
+          <button type="button" role="radio" data-modo="auto">Automático</button>
+        </div>
+        <p class="dica">Automático acompanha o modo claro ou escuro do computador. A folha do documento fica sempre branca, como no SEI.</p>
+      </section>
+      <section class="cfg-secao"><h2>Campos</h2>
+        <p class="dica">Os dados que o programa procura nos documentos e que você usa nos modelos. Mude o nome ou a categoria, esconda os que o seu órgão não usa, ou crie campos novos. Vai junto no "Exportar tudo".</p>
+        <div><button type="button" class="btn primario" id="btNovoCampo"><svg class="ic" aria-hidden="true"><use href="#i-mais"/></svg>Novo campo</button></div>
+        <div id="cfgCampos" class="cfg-campos"></div>
+      </section>
+    </div>
+  </section>
+</main>
+
+<!-- Gaveta: processos salvos, grupos, cópia de segurança -->
+<div id="fundoGaveta" class="fundo" hidden></div>
+<aside id="painelProcessos" class="gaveta" hidden aria-label="Processos salvos">
+  <header><h2>Processos salvos</h2>
+    <button class="btn ico" type="button" id="btFecharProcessos" title="Fechar" aria-label="Fechar"><svg class="ic" aria-hidden="true"><use href="#i-x"/></svg></button></header>
+  <label class="busca"><svg class="ic" aria-hidden="true"><use href="#i-busca"/></svg><input type="search" id="buscaProcessos" placeholder="Buscar por número, empresa ou artista" aria-label="Buscar processo salvo"></label>
+  <div id="listaProcessos"></div>
+  <footer>
+    <button class="btn" id="btNovoGrupo" type="button"><svg class="ic" aria-hidden="true"><use href="#i-mais"/></svg>Novo grupo</button>
+    <button class="btn" id="btExportarProc" type="button">Exportar tudo (.json)</button>
+    <label class="btn">Importar tudo<input type="file" id="inImportarProc" accept=".json" hidden></label>
+    <p class="dica">Os processos ficam guardados só neste navegador. "Exportar tudo" faz uma cópia de segurança
+      (processos, Checklist e modelos editados) para guardar ou levar a outro computador.</p>
+  </footer>
+</aside>
+
+<!-- Janela de confirmação / pergunta (no lugar das do navegador) -->
+<dialog id="dlg">
+  <form method="dialog">
+    <h2 id="dlgTitulo"></h2>
+    <p id="dlgTexto"></p>
+    <input id="dlgEntrada" autocomplete="off" hidden>
+    <div id="dlgCampos" hidden></div>
+    <div class="barra">
+      <button class="btn" type="button" id="dlgCancelar">Cancelar</button>
+      <button class="btn primario" value="ok" id="dlgOk">OK</button>
+    </div>
+  </form>
+</dialog>
+
+<div id="soltarTela" hidden><div><svg class="ic grande" aria-hidden="true"><use href="#i-zip"/></svg>Solte para abrir</div></div>
+<div id="toast" role="status" aria-live="polite"></div>
+
+<!-- tudo local, sem internet -->
+<script src="lib/pdf.min.js"></script>
+<script src="lib/mammoth.browser.min.js"></script>
+<script src="lib/tesseract.min.js"></script>
+<script src="versao.js"></script>
+<script src="consulta.js"></script>
+<section id="impressao" aria-hidden="true"></section>
+<script src="extrator.js"></script>
+<script src="modelos-padrao.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
